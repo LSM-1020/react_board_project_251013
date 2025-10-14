@@ -40,7 +40,7 @@ function App() {
       <Route path='/board' element={<Board user={user}/>} /> 
       <Route path='/login' element={<Login onLogin={setUser}/>} />
       <Route path='/signup' element={<Signup />} />
-      <Route path='/board/:id' element={<BoardDetail />} />
+      <Route path='/board/:id' element={<BoardDetail user={user} />} />
       <Route path='/board/Write' element={<BoardWrite user={user} />} />
      </Routes>
     

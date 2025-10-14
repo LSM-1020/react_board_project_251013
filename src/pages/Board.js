@@ -7,13 +7,22 @@ function Board({user}) {
 
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [error, setError]=useState(null);
+
+
   //게시판 모든글 요청
   const loadPost = async()=>{
     try{
+      setLoading(true);
       const res = await api.get("/api/board"); //모든글 가져오기 요청
       setPosts(res.data); //posts->전체 게시글
     } catch(err){
         console.error(err);
+        setError("게시글 조회 실패")
+        setPosts([]);//게시글 배열을 다시 초기화
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -36,11 +45,11 @@ function Board({user}) {
     return date.toLocaleDateString(); //리턴값은 date.Date타입이라 쓸수있는 toLocaldatestring으로
   }
 
-
-
   return (
     <div className="container">
       <h2>게시판 페이지</h2>
+      {loading && <p>게시판 글 리스트 로딩중...</p>}
+      {error && <p style={{color:"red"}}>{error}</p>}
       <table className="board-table">
         <thead>
           <tr>
