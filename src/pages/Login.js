@@ -13,7 +13,7 @@ function Login({ onLogin }) {
       e.preventDefault();
       try{
         await api.post("/api/auth/login",
-          new URLSearchParams({ username,password })); //시큐리티가 파라미터 형식으로 전달
+          new URLSearchParams({ username,password })); //시큐리티가 파라미터 형식으로 전달, 폼데이터 전송방식일때는 반드시 URL로
        
         //현재 로그인한 사용자 정보 가져오기
         const res = await api.get("api/auth/me");

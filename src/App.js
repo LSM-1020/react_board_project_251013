@@ -26,7 +26,7 @@ function App() {
   },[]);
 
   const handleLogout = async ()=>{
-    await api.post("/api/auth/logout");
+    await api.post("/api/auth/logout"); //백엔드 시큐리티에서 이 요청이 들어가면 로그아웃
     setUser(null);
   }
  
@@ -35,12 +35,13 @@ function App() {
     
      <Navbar user={user} onLogout={handleLogout} />
      <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/board' element={<Board />} />
+      <Route path='/' element={<Home />} /> 
+      {/* /*app에서 선언한것들을 타 페이지에서 쓰기위해 props를 넣어줌 ->board는 user가 필요하기에 user={user}로 써주면, board페이지에서 board 쓸수있음*/}
+      <Route path='/board' element={<Board user={user}/>} /> 
       <Route path='/login' element={<Login onLogin={setUser}/>} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/board/:id' element={<BoardDetail />} />
-      <Route path='/board/Write' element={<BoardWrite />} />
+      <Route path='/board/Write' element={<BoardWrite user={user} />} />
      </Routes>
     
     </div>
