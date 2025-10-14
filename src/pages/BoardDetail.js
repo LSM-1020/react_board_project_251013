@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { redirect, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../api/axiosConfig";
+import "./BoardDetail.css";
 
 function BoardDetail({user}) {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ function BoardDetail({user}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {id} = useParams(); //app.js의 board/:id id파라미터 받아오기
-
+ 
   const loadPost = async()=>{ //특정 글 id로 글 1개 요청하기
     try {
       setLoading(true);
@@ -22,10 +23,32 @@ function BoardDetail({user}) {
       setLoading(false);
     }
   };
+ //글 삭제
+const handleDelete = async() => {
+  if(!window.confirm("정말 삭제하시겠습니까?")) { //확인누르면 true, 취소누르면 false
+    return;
+  }
+    try{
+      const res = await api.delete(`/api/board/${id}`); 
+      alert("글 삭제 성공")
+      navigate("/board")
+    } catch(err){
+       console.error(err);
+       if(err.response.status == 403) {
+          alert("삭제 권한이 없습니다")
+       } else {
+        alert("삭제 실패")
+       }
+       
+    } 
+  }
 
   useEffect(()=>{
     loadPost();
   },[id]);
+
+  
+
   
   if(loading) return <p>게시글 로딩중...</p>;
   if(error) return <p style={{color:"red"}}>{error}</p>
@@ -43,9 +66,9 @@ function BoardDetail({user}) {
           <button onClick={()=>navigate("/board")}>글목록</button>
           {/* 로그인한 유저 본인이 쓴 글만 삭제 수정 가능 */}
           {isAuthor && (
-            <>
-              <button>수정</button>
-              <button>삭제</button>
+            <>  
+              <button className="edit-button">수정</button>
+              <button className="delete-button" onClick={handleDelete}>삭제</button>
             </>
             )}
 
