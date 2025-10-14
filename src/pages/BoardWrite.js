@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axiosConfig";
+import "./BoardWrite.css"
 
 function BoardWrite({user}) {
   const [title, setTitle] = useState(""); //제목은 공백문자열
   const [content, setContent] = useState(""); //내용도 공백문자열
   const navigate = useNavigate();
+
 
   const handleSubmit=async(e)=>{
     e.preventDefault({title,content}); //이벤트함수에서 무조건 넣어줌, 안넣으면 이벤트 실행시 페이지 새로고침됨
@@ -28,7 +30,7 @@ function BoardWrite({user}) {
   return (
     <div className="write-container">
       <h2>글쓰기</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="write-form">
         <input type="text" placeholder="제목" value={title} 
         onChange={(e)=>setTitle(e.target.value)}/>
         <textarea placeholder="내용" value={content} 
