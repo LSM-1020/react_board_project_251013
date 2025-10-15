@@ -6,6 +6,7 @@ import "./BoardWrite.css"
 function BoardWrite({user}) {
   const [title, setTitle] = useState(""); //제목은 공백문자열
   const [content, setContent] = useState(""); //내용도 공백문자열
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
 
@@ -21,8 +22,13 @@ function BoardWrite({user}) {
       alert("글작성 완료")
       navigate("/board")
     } catch(err) {
-      console.error(err);
-      alert("글쓰기 실패")
+       if(err.response && err.response.status===400){ //회원가입 400에러 발생
+          setErrors(err.response.data); //에러 추출,errors에 저장
+        } else {
+          console.error(err);
+          alert("글쓰기 실패")
+        }
+      
     }
   }
 
@@ -33,8 +39,10 @@ function BoardWrite({user}) {
       <form onSubmit={handleSubmit} className="write-form">
         <input type="text" placeholder="제목" value={title} 
         onChange={(e)=>setTitle(e.target.value)}/>
+         {errors.title && <p style={{color:"red"}}>{errors.title}</p>}
         <textarea placeholder="내용" value={content} 
         onChange={(e)=>setContent(e.target.value)}/>
+         {errors.content && <p style={{color:"red"}}>{errors.content}</p>}
         <div className="button-group">
           <button type="submit">등록</button>
           <button type="button" onClick={()=>navigate("/board")}>취소</button> {/*취소버튼()에 navi넣어라, 눌리면 navigate호출되는데 /board로 */}
