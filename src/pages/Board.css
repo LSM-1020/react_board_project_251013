@@ -41,7 +41,7 @@ h2 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-   
+    margin-bottom: 20px;
 }
 
 .write-button:hover {
@@ -58,4 +58,35 @@ h2 {
 
 .click-title:hover {
     text-decoration: underline;
+}
+
+.pagenation {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pagenation button {
+    padding: 5px 10px;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.pagenation button.active {
+     padding: 5px 10px;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: rgb(126, 128, 197);
+    color: white;
+    font-weight: bolder;
+}
+
+/* 버튼속성이 disble인 버튼만 적용 */
+.pagenation button:disabled {
+    cursor: not-allowed; /*금지 화살표 포인터 모양으로*/
+    opacity: 0.5; /*투명도50%*/
 }
