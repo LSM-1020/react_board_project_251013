@@ -72,6 +72,33 @@ const handleDelete = async() => {
     loadPost();
   },[id]);
 
+//댓글관련 이벤트처리 시작
+  const [newComment, setNewComment] = useState("");//새로운 댓글 저장 변수
+  const [comments, setComments] = useState([]);//백엔드에서 가져온 기존 댓글 배열  
+  const [editCommentContent, setEditCommentContent] = useState("");
+  const [editCommentId, setEditCommentId] = useState(null);
+
+//댓글 제출 함수
+const handleCommentSubmit =()=>{
+
+}
+//댓글 삭제 이벤트 함수
+const handleCommentDelete =()=>{
+
+}
+//날짜 format 함수
+const formatDate = (dateString) => {
+    
+    return dateString.substring(0,10);
+}
+//댓글 수정 이벤트 함수
+const handleCommentUpdate = () =>{
+
+}
+//댓글관련 이벤트처리 끝
+
+
+
   if(loading) return <p>게시글 로딩중...</p>;
   if(error) return <p style={{color:"red"}}>{error}</p>
   if(!post) return <p style={{color:"red"}}>해당게시글이 존재하지 않습니다</p>
@@ -109,6 +136,53 @@ const handleDelete = async() => {
               </>
               )}    
         </div>
+              {/* 댓글영역 시작 */}
+                <div className="comment-section">
+                  {/* 댓글 입력 폼 */}
+                  <h3>댓글 쓰기</h3>
+                  <form onSubmit={handleCommentSubmit} className="comment-form">
+                    <textarea placeholder="댓글입력"
+                    value={newComment} onChange={(e)=>setNewComment(e.target.value)}/>
+  
+                    <button type="submit" className="comment-button">등록</button>
+                  </form>
+                </div>
+                {/* 기존 댓글 리스트 시작 */}
+                <ul className="comment-list">
+                  {comments.map((c)=>(
+                    <li key={c.id} className="comment-item">
+                      <div className="comment-header">
+                        <span className="comment-author">
+                          {c.author.username}
+                        </span>
+                        <span className="comment-date">
+                          {formatDate(c.createDate)}
+                        </span>
+                      </div>
+
+                      <div className="comment-content">
+                        {c.content}
+                      </div>
+
+                      <div className="button-group">
+                        <button className="list-button" onClick={()=>navigate("/board")}>글목록</button>
+                          {/* 로그인한 유저 본인이 쓴 글만 삭제 수정 가능 */}
+                          {user===c.author.username && (
+                            <>   
+                              <button className="edit-button" onClick={()=>handleCommentUpdate(c)}>수정</button>  {/*수정버튼 누르면 setditing에 true가 담겨서호출 */}
+                              <button className="delete-button" onClick={handleCommentDelete(c.id)}>삭제</button>
+                            </>
+                          )}    
+                      </div>
+                    </li>
+
+                  ))}                 
+                </ul>
+                {/* 기존 댓글 리스트 끝 */}
+              {/* 댓글영역 끝 */}
+
+
+
         </>
       )} 
     </div>
