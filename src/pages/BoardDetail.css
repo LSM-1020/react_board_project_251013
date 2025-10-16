@@ -79,3 +79,132 @@
     box-sizing: border-box;
     
 }
+
+/* 댓글 섹션 전체 영역 */
+.comment-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+/* 댓글 입력 폼 */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    resize: vertical;
+    min-height: 50px;
+    padding: 0px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.comment-button {
+    align-self: flex-end;
+    width: 100px;
+    padding: 8px 12px;
+    background-color: #5f6fc9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-button:hover {
+    background-color: #3f51b5;
+}
+
+/* 댓글 리스트 */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 6px 8px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.comment-content {
+    font-size: 16px;       /* 글자 크기 작게 */
+    line-height: 1.2;      /* 줄 간격 좁게 */
+    max-width: 400px;      /* 너비 제한 (필요시 조절) */
+    word-wrap: break-word; /* 긴 단어 줄바꿈 */
+}
+
+/* 댓글 수정 textarea */
+.comment-item textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    resize: vertical;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* 댓글 수정/삭제 버튼 */
+.comment-save,
+.comment-cancel,
+.edit-button,
+.delete-button {
+    padding: 6px 10px;
+    margin-right: 5px;
+    font-size: 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-save {
+    background-color: #58c06a;
+    color: white;
+}
+.comment-save:hover {
+    background-color: #4caf50;
+}
+
+.comment-cancel {
+    background-color: #e0e0e0;
+    color: black;
+}
+.comment-cancel:hover {
+    background-color: #bdbdbd;
+}
+
+/* 기존 edit/delete 버튼 재활용 스타일 */
+.edit-button {
+    background-color: #58c06a;
+}
+.delete-button {
+    background-color: #fc0217;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+.delete-button:hover {
+    background-color: #d50000;
+}
