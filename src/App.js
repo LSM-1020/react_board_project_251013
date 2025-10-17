@@ -4,7 +4,7 @@ import Navbar from './component/Navbar';
 import Home from "./pages/Home";
 import Board from "./pages/Board";
 import Login from "./pages/Login";
-import BoardDetail from "./pages/BoardDetail";
+import BoardDetail from "./pages/BoardDetail_bak";
 import BoardWrite from "./pages/BoardWrite";
 import Signup from "./pages/Signup";
 import { useEffect, useState } from 'react';
